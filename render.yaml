@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mytodo-api
+    env: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+
+  - type: static_site
+    name: mytodo-client
+    rootDir: .
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://mytodo-api.onrender.com/
+
+

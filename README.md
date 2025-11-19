@@ -101,3 +101,24 @@ The backend server provides the following endpoints:
 - Express.js
 - CORS
 - dotenv
+
+## Deploying to Render
+
+1. **Backend service**
+   - Push this repo to GitHub.
+   - Create a new **Web Service** on Render pointing to the `server` directory.
+   - Set the build command to `cd server && npm install`.
+   - Set the start command to `cd server && npm start`.
+   - Add environment variables as needed (e.g., `PORT=10000` is set automatically by Render).
+
+2. **Frontend service**
+   - Create a new **Static Site** on Render pointing to the repo root.
+   - Build command: `npm install && npm run build`.
+   - Publish directory: `dist`.
+   - In the Render static site settings, add the environment variable `VITE_API_URL=https://<your-backend-service>.onrender.com/`.
+
+3. **Verify deployment**
+   - Once both services are live, open the frontend URL and confirm that you can create, toggle, and delete tasks.
+
+> Tip: A sample `render.yaml` blueprint is provided so you can deploy both services from a single Render "Blueprint" project. Update the service names or environment variables there if you prefer different naming.
+

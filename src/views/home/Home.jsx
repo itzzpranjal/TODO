@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Home.css';
 import delImg from '../../assets/delete.png';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config';
 
 const Home = () => {
   const [todos, setTodos] = useState([]);
@@ -17,7 +18,7 @@ const Home = () => {
   const fetchTodos = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}todos`);
+      const response = await axios.get(`${API_BASE_URL}todos`);
       setTodos(response.data.data);
     } catch (error) {
       console.error('Error fetching todos:', error);
@@ -33,7 +34,7 @@ const Home = () => {
   const deleteTodo = async (id) => {
     if (window.confirm('Are you sure you want to delete this todo?')) {
       try {
-        const response = await axios.delete(`${import.meta.env.VITE_API_URL}todos/${id}`);
+        const response = await axios.delete(`${API_BASE_URL}todos/${id}`);
         if (response) {
           fetchTodos();
         }
@@ -46,7 +47,7 @@ const Home = () => {
 
   const toggleComplete = async (id, currentStatus) => {
     try {
-      await axios.patch(`${import.meta.env.VITE_API_URL}todos/${id}`, {
+      await axios.patch(`${API_BASE_URL}todos/${id}`, {
         completed: !currentStatus
       });
       fetchTodos();

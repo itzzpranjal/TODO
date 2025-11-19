@@ -3,6 +3,7 @@ import './CreateTodo.css';
 import EmojiPicker from 'emoji-picker-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config';
 
 const CreateTodo = () => {
   const [todoData, setTodoData] = useState({
@@ -28,7 +29,7 @@ const CreateTodo = () => {
     setMessage({ type: '', text: '' });
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}todos`, todoData);
+      const response = await axios.post(`${API_BASE_URL}todos`, todoData);
       
       if (response) {
         setMessage({ type: 'success', text: response.data.message });
